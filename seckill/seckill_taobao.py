@@ -161,8 +161,8 @@ class ChromeDrive:
         self.driver.get("https://cart.taobao.com/cart.htm")
         sleep(1)
 
-        if self.driver.find_element(By.ID, "J_SelectAll1"):
-            self.driver.find_element(By.ID, "J_SelectAll1").click()
+        if self.driver.find_element(By.XPATH, '//label[contains(@class,"ant-checkbox-wrapper") and .//span[text()="全选"]]'):
+            self.driver.find_element(By.CSS_SELECTOR, '.cartOperationCheckbox--CIlk23mK .ant-checkbox').click()
             print("已经选中全部商品！！！")
 
         submit_succ = False
@@ -183,19 +183,19 @@ class ChromeDrive:
 
                 try:
 
-                    if self.driver.find_element(By.ID, "J_Go"):
-                        self.driver.find_element(By.ID, "J_Go").click()
+                    if self.driver.find_element(By.XPATH, '//div[contains(@class,"btn--") and contains(normalize-space(),"结算")]'):
+                        self.driver.find_element(By.XPATH, '//div[contains(@class,"btn--") and contains(normalize-space(),"结算")]').click()
                         print("已经点击结算按钮...")
                         click_submit_times = 0
                         while True:
                             try:
                                 if click_submit_times < 10:
-                                    self.driver.find_element(By.LINK_TEXT, '提交订单').click()
+                                    self.driver.find_element(By.XPATH, '//div[contains(@class,"btn--") and contains(normalize-space(),"提交订单")]').click()
                                     print("已经点击提交订单按钮")
                                     submit_succ = True
                                     break
-                                else:
-                                    print("提交订单失败...")
+                                #else:
+                                    #print("提交订单失败...")
                             except Exception as e:
 
                                 print("没发现提交按钮, 页面未加载, 重试...")
